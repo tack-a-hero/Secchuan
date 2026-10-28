@@ -473,7 +473,8 @@ function setup(){
       if(S.players.length<3)S.players=[];
       S.rounds=[1,2,3].includes(v.rounds)?v.rounds:2;S.time=[0,60,90,120].includes(v.time)?v.time:90}}catch(e){}
   if(!S.players.length)S.players=["","","",""];
-  const paint=()=>{
+  const paint=(preserveScroll=false)=>{
+    const scrollTop=preserveScroll?main.scrollTop:0;
     show(`<div class="body">
       <h2>プレイヤー</h2>
       <p class="lead" style="margin-bottom:16px">3〜8人で遊べます。</p>
@@ -497,10 +498,10 @@ function setup(){
         <button class="x" aria-label="削除">×</button>`;
       const av=d.querySelector(".av");
       d.querySelector("input").oninput=e=>{S.players[i]=e.target.value;av.textContent=ini(e.target.value)!=="?"?ini(e.target.value):String(i+1)};
-      d.querySelector(".x").onclick=()=>{if(S.players.length>3){S.players.splice(i,1);paint()}};
+      d.querySelector(".x").onclick=()=>{if(S.players.length>3){S.players.splice(i,1);paint(true)}};
       pl.appendChild(d);
     });
-    document.getElementById("add").onclick=()=>{if(S.players.length<8){S.players.push("");paint()}};
+    document.getElementById("add").onclick=()=>{if(S.players.length<8){S.players.push("");paint(true)}};
     const seg=(id,vals,get,fmt,set)=>{const el=document.getElementById(id);el.innerHTML="";
       vals.forEach(v=>{const b=document.createElement("button");b.textContent=fmt(v);
         b.setAttribute("aria-pressed",String(v===get()));b.onclick=()=>{set(v);seg(id,vals,get,fmt,set)};el.appendChild(b)})};
@@ -513,6 +514,7 @@ function setup(){
       try{store.setItem("secchuan",JSON.stringify({players:names,rounds:S.rounds,time:S.time}))}catch(e){}
       hostPhase();
     };
+    main.scrollTop=scrollTop;
   };paint();
 }
 
