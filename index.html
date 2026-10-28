@@ -639,8 +639,8 @@ function studio(){
 
   const clearPaper=()=>{ctx.fillStyle="#FFF";ctx.fillRect(0,0,W,H)};
   function fit(){
-    const b=stage.getBoundingClientRect(),dpr=Math.min(2,window.devicePixelRatio||1);
-    const w=Math.max(1,Math.round(b.width)),h=Math.max(1,Math.round(b.height));
+    const box=getComputedStyle(stage),dpr=Math.min(2,window.devicePixelRatio||1);
+    const w=Math.max(1,stage.clientWidth-parseFloat(box.paddingLeft)-parseFloat(box.paddingRight)),h=Math.max(1,stage.clientHeight-parseFloat(box.paddingTop)-parseFloat(box.paddingBottom));
     if(W&&(w!==W||h!==H)){const k=w/W,kh=h/H;
       [...strokes,...redoStack].forEach(st=>{st.w*=k;st.pts.forEach(q=>{q.x*=k;q.y*=kh})})}
     W=w;H=h;cv.width=w*dpr;cv.height=h*dpr;cv.style.width=w+"px";cv.style.height=h+"px";
