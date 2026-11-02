@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head><style id="separated-controls-v25">@layer separatedControlsV25{
+<head><style id="reveal-finish-v26">@layer revealFinishV26{html body :is(.revealed-topic-pair strong){font-size:clamp(28px,6vw,40px)!important;font-weight:700!important;line-height:1.45!important;letter-spacing:.01em!important;white-space:normal!important;word-break:normal!important;overflow-wrap:anywhere!important;text-overflow:clip!important;height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important;-webkit-line-clamp:unset!important;text-shadow:none!important}
+html body .revealed-topic-pair{margin:0 0 16px!important}html body .revealed-topic-pair>div{display:flex;align-items:baseline;justify-content:center;flex-wrap:wrap;gap:8px}html body .revealed-topic-pair strong{color:var(--tx)!important}
+}</style><style id="separated-controls-v25">@layer separatedControlsV25{
  html body .world-actions{gap:8px!important}
  html body :is(button.btn,button.tool,.session-dialog button,.session-cover button){border-radius:6px!important}
 }</style><style id="drawing-detail-v24">@layer drawingDetailV24{html body .studio{display:flex!important;flex-direction:column!important;box-sizing:border-box!important;height:var(--app-view-h)!important;min-height:0!important;gap:0!important;padding:0!important}html body .studio .brief{flex:none!important}html body .studio .stage{flex:1 1 0!important;min-height:0!important;height:auto!important;box-sizing:border-box!important;padding:4px!important}
@@ -873,7 +875,7 @@ function reveal(){
   const mids=S.order.filter((wi,i)=>pts[i]===best);
   const names=mids.map(wi=>S.players[S.works[wi].player]);
   show(`<div class="body">
-    <p class="eyebrow">結果 ・ 「${esc(S.topicA)}」×「${esc(S.topicB)}」</p>
+    <div class="revealed-topic-pair"><span class="eyebrow">今回のお題</span><div><strong>${esc(S.topicA)}</strong><span aria-hidden="true"> × </span><strong>${esc(S.topicB)}</strong></div></div>
     <h2 style="margin-top:8px">真ん中は ${esc(names.join(" ・ "))}</h2>
     <p class="lead">並んだ順に得点を公開します。</p>
     ${n===2?`<div class="axis"><span class="c">真ん中らしい順 ・ 3点／1点</span></div>`:`<div class="axis"><span><b>${esc(S.topicA)}</b> 寄り</span><span class="c">中央 ★</span><span>寄り <b>${esc(S.topicB)}</b></span></div>`}
