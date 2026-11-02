@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head><style id="refinement-v21">@layer approvalV21,squareNotebookV21,passV21;</style><meta name="app-release" content="screen-repair-20261029-v10"><script>window.SessionUI=(()=>{
+<head><style id="separated-controls-v25">@layer separatedControlsV25{
+ html body .world-actions{gap:8px!important}
+ html body :is(button.btn,button.tool,.session-dialog button,.session-cover button){border-radius:6px!important}
+}</style><style id="drawing-detail-v24">@layer drawingDetailV24{html body .studio{display:flex!important;flex-direction:column!important;box-sizing:border-box!important;height:var(--app-view-h)!important;min-height:0!important;gap:0!important;padding:0!important}html body .studio .brief{flex:none!important}html body .studio .stage{flex:1 1 0!important;min-height:0!important;height:auto!important;box-sizing:border-box!important;padding:4px!important}
+ html body .dock:has(#nibs){display:grid!important;grid-template-columns:minmax(112px,1fr) minmax(148px,1fr)!important;grid-template-rows:44px 48px!important;align-items:center!important;gap:8px!important;padding:8px 4px!important;flex:none!important;position:static!important;box-sizing:border-box!important}
+ html body .dock:has(#nibs) :is(.sec-mode-pair,.tools.grow,#nibs){display:flex!important;align-items:center!important;gap:4px!important;margin:0!important;padding:0!important;flex:none!important;min-width:0!important;grid-column:auto!important;grid-row:auto!important}
+ html body .dock:has(#nibs) :is(.sec-mode-pair,.tools.grow,#nibs){gap:8px!important}html body .dock:has(#nibs) .sec-mode-pair{grid-column:1!important;grid-row:1!important;justify-self:start!important}html body #nibs{grid-column:1!important;grid-row:2!important;justify-self:start!important}html body .dock:has(#nibs) .tools.grow{grid-column:2!important;grid-row:1!important;justify-self:end!important}
+ html body #nibs button{display:flex!important;align-items:center!important;justify-content:center!important;width:32px!important;min-width:32px!important;height:44px!important;min-height:44px!important;padding:0!important;border:0!important;background:none!important;color:#24466f!important;box-shadow:none!important;border-radius:6px!important}
+ html body #nibs button[aria-pressed=true]{background:#244f8f!important;color:#fff!important}
+ html body #nibs svg{display:block!important;width:22px!important;height:22px!important}
+ html body #done{grid-column:2!important;grid-row:2!important;width:100%!important;margin:0!important;border-radius:6px!important}
+html body #cv{border-radius:8px!important}html body #done{border-radius:6px!important}html body :is(#bPen,#bErase,#bUndo,#bRedo,#bClear,#penModeBtn,#eraserBtn,#undoBtn,#redoBtn,#er,#undo,#redo,#clr,#clearBtn){border-radius:6px!important}html body :is(.drawing-mode-pair,.drawing-edit-pair,.sec-mode-pair,.tools>.row,.tools,.toolrow){gap:8px!important}}</style><style id="refinement-v21">@layer approvalV21,squareNotebookV21,passV21;</style><meta name="app-release" content="screen-repair-20261029-v10"><script>window.SessionUI=(()=>{
  const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  const icon=p=>p.icon||(window.GameArt?GameArt.person(p.seat??p.id):'');
  const rows=players=>players.map(p=>`<button type="button" class="session-seat ${p.done?'is-confirmed':''}" data-seat="${esc(p.id)}" ${p.disabled?'disabled':''}><span class="session-face">${icon(p)}</span><span class="session-seat-copy"><b>${esc(p.name)}</b><small>${esc(p.status||(p.done?'確認済み':'タップして確認'))}</small></span><span class="session-chevron" aria-hidden="true">${p.done?'✓':'›'}</span></button>`).join('');
@@ -712,7 +723,7 @@ function studio(){
   const nibs=document.getElementById("nibs");
   NIBS.forEach(w=>{
     const b=document.createElement("button");b.className="tool";b.setAttribute("aria-label","太さ"+w);
-    const dsz=Math.max(5,Math.min(17,w+3));b.innerHTML=`<s style="width:${dsz}px;height:${dsz}px"></s>`;
+    const dsz=Math.max(2,Math.min(7,w));b.innerHTML=`<svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22"><path d="M5 19 19 5" stroke="currentColor" stroke-width="${dsz}" stroke-linecap="round"/></svg>`;
     b.setAttribute("aria-pressed",String(w===nib));
     b.onclick=()=>{nib=w;erasing=false;
       Array.prototype.forEach.call(nibs.children,x=>x.setAttribute("aria-pressed","false"));
