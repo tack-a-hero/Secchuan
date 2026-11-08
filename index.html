@@ -564,7 +564,7 @@ function setup(){
     S.players.forEach((n,i)=>{
       const d=document.createElement("div");d.className="prow";
       d.innerHTML=`<span class="av">${GameArt.button(i)}</span>
-        <input class="inp" type="text" maxlength="12" placeholder="プレイヤー ${i+1}" value="${esc(n)}">
+        <input class="inp" type="text" maxlength="12" placeholder="プレイヤー${i+1}" aria-label="プレイヤー${i+1}の名前" value="${esc(n)}">
         <button class="x" aria-label="削除">×</button>`;
       const av=d.querySelector(".av");
       d.querySelector("input").oninput=e=>{S.players[i]=e.target.value;av.innerHTML=GameArt.button(i)};
